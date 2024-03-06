@@ -1,7 +1,7 @@
-import numpy as np
-import random as rand
 from Game import Game
-def whoWon(a, b, game):
+
+
+def whoWon(game, a, b):
     if a == 'R' and b == 'S':
         game.winner = True
     elif a == 'R' and b == 'P':
@@ -17,19 +17,47 @@ def whoWon(a, b, game):
     elif a == b:
         game.tie = True
 
+
 def keepScore(game):
-    if game.winner:
+    if game.tie:
+        return
+    elif (not game.tie) and game.winner:
         game.myScore += 1
-    elif not game.winner:
+    elif (not game.tie) and not game.winner:
         game.computerScore += 1
-    elif game.tie == True:
+
+
+newGame = Game(0, 0, '', '', False, False)
+
+
+def playGame(myGame):
+    myGame.myTurn()
+    myGame.computerTurn()
+    print("The computer chose: " + myGame.computerChoice)
+
+    whoWon(myGame, myGame.myChoice, myGame.computerChoice)
+    keepScore(myGame)
+
+    if myGame.tie:
+        print("Its a tie!")
+    else:
+        if myGame.winner:
+            print("You won!")
+        elif not myGame.winner:
+            print("You lose")
+
+    print('Your score ' + str(myGame.myScore) + ' Computer score ' + str(myGame.computerScore))
+
+    playAgain = input('Would you like to play again? (Y/n) ')
+    if playAgain == 'Y':
+        myGame.winner = False
+        myGame.tie = False
+        playGame(myGame)
+    elif playAgain == 'n':
+        print('Final score: You - ' + str(myGame.myScore)
+              + ' Computer - ' + str(myGame.computerScore)
+              + '\nThanks for playing!')
         return
 
-def playGame():
-    newGame = Game(0, 0, '', '', bool, bool)
 
-    newGame.myTurn()
-    newGame.computerTurn()
-    #print(newGame.myChoice, newGame.computerChoice)
-
-playGame()
+playGame(newGame)
