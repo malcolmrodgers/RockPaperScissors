@@ -1,3 +1,17 @@
-import numpy as np
 import random as rand
+class Game:
+    def __init__(self, myScore, computerScore, myChoice, computerChoice):
+        self.computerScore = computerScore
+        self.computerChoice = computerChoice
+        self.myChoice = myChoice
+        self.myScore = myScore
+
+    def myTurn(self):
+        choice = input("Choose Rock, Paper, or Scissors (R/P/S): ")
+        self.myChoice = choice
+
+    def computerTurn(self):
+        choices = ['R', 'P', 'S']
+        self.computerChoice = rand.choice(choices)
+
 
