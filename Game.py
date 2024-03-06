@@ -1,6 +1,8 @@
 import random as rand
 class Game:
-    def __init__(self, myScore, computerScore, myChoice, computerChoice):
+    def __init__(self, myScore, computerScore, myChoice, computerChoice, winner, tie):
+        self.tie = tie
+        self.winner = winner
         self.computerScore = computerScore
         self.computerChoice = computerChoice
         self.myChoice = myChoice
