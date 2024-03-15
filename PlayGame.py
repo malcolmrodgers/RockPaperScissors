@@ -1,7 +1,16 @@
+"""
+Created March 2024
+@author: Malcolm Rodgers
+"""
+
 from Game import Game
 
 
-def whoWon(game, a, b):
+# Given game object, determine the winner and store the result
+def whoWon(game):
+    a = game.myChoice
+    b = game.computerChoice
+
     if a == 'R' and b == 'S':
         game.winner = True
     elif a == 'R' and b == 'P':
@@ -18,6 +27,7 @@ def whoWon(game, a, b):
         game.tie = True
 
 
+# Once game.winner is set (or .tie), update the score parameters
 def keepScore(game):
     if game.tie:
         return
@@ -27,13 +37,15 @@ def keepScore(game):
         game.computerScore += 1
 
 
+# Create a new game object
 newGame = Game(0, 0, '', '', False, False)
 
 
+# playGame runs each helper function, storing the results in the new game object
 def playGame(myGame):
     myGame.myTurn()
     myGame.computerTurn()
-    print("The computer chose: " + myGame.computerChoice)
+    print('The computer chose: ' + myGame.computerChoice)
 
     whoWon(myGame, myGame.myChoice, myGame.computerChoice)
     keepScore(myGame)
@@ -48,6 +60,7 @@ def playGame(myGame):
 
     print('Your score ' + str(myGame.myScore) + ' Computer score ' + str(myGame.computerScore))
 
+    # Prompt the user to play again, if Y then reset parameters
     playAgain = input('Would you like to play again? (Y/n) ')
     if playAgain == 'Y':
         myGame.winner = False
@@ -59,5 +72,5 @@ def playGame(myGame):
               + '\nThanks for playing!')
         return
 
-
+# Call playGame
 playGame(newGame)
